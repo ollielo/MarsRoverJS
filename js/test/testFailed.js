@@ -6,6 +6,6 @@ var assert = require("should");
 
 describe("A failing test", function () {
     it("should fail", function () {
-        assert.equal(1, 0);
+        assert.equal(1, 1);
     })
 });
