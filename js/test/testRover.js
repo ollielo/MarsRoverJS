@@ -51,6 +51,15 @@ describe('A Mars Rover', function () {
                     rover.orientation.should.be.exactly('S');
                 });
             });
-        })
+            describe('A Backward command', function () {
+                it("should increase Rover's y position by 1 unit", function () {
+                    var rover = new Rover(0, 0, 'S');
+                    rover.receiveCommands('b');
+                    rover.x.should.be.exactly(0);
+                    rover.y.should.be.exactly(1);
+                    rover.orientation.should.be.exactly('S');
+                });
+            });
+        });
     });
 });
