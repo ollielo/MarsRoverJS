@@ -41,5 +41,16 @@ describe('A Mars Rover', function () {
             });
         });
 
+        describe('When the Rover is facing South', function () {
+            describe('A Forward command', function () {
+                it("should decrease Rover's y position by 1 unit", function () {
+                    var rover = new Rover(0, 0, 'S');
+                    rover.receiveCommands('f');
+                    rover.x.should.be.exactly(0);
+                    rover.y.should.be.exactly(-1);
+                    rover.orientation.should.be.exactly('S');
+                });
+            });
+        })
     });
 });
