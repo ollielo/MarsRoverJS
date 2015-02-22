@@ -37,9 +37,9 @@ describe('A Mars Rover', function () {
                     rover.x.should.be.exactly(0);
                     rover.y.should.be.exactly(-1);
                     rover.orientation.should.be.exactly('N');
-                })
-            })
+                });
+            });
         });
 
-    })
+    });
 });
