@@ -8,7 +8,11 @@ function Rover(x, y, orientation) {
     this.orientation = orientation;
     
     this.receiveCommands = function (cmds) {
-
+        if (orientation == 'N') {
+            if (cmds == 'f') {
+                this.y += 1;
+            }
+        }
     }
 }
 
