@@ -11,6 +11,13 @@ describe('A Mars Rover', function () {
             rover.x.should.be.exactly(0);
             rover.y.should.be.exactly(0);
             rover.orientation.should.be.exactly('N');
+        });
+    });
+    
+    describe('Receives Commands', function () {
+        it('should receive a character string of commands', function () {
+            var rover = new Rover(0, 0, 'N');
+            rover.receiveCommands('frbl');
         })
     })
 });
