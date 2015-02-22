@@ -14,6 +14,10 @@ function Rover(x, y, orientation) {
             } else {
                 this.y -= 1;
             }
+        } else if (orientation == 'S') {
+            if (cmds == 'f') {
+                this.y -= 1;
+            }
         }
     }
 }
