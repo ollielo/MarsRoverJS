@@ -18,6 +18,19 @@ describe('A Mars Rover', function () {
         it('should receive a character string of commands', function () {
             var rover = new Rover(0, 0, 'N');
             rover.receiveCommands('frbl');
-        })
+        });
+        
+        describe('When the Rover is facing North', function () {
+            describe('A Forward command', function () {
+                it("should increase Rover's y position by 1 unit", function () {
+                    var rover = new Rover(0, 0, 'N');
+                    rover.receiveCommands('f');
+                    rover.x.should.be.exactly(0);
+                    rover.y.should.be.exactly(1);
+                    rover.orientation.should.be.exactly('N');
+                });
+            });
+        });
+
     })
 });

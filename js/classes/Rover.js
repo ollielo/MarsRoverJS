@@ -8,8 +8,8 @@ function Rover(x, y, orientation) {
     this.orientation = orientation;
     
     this.receiveCommands = function (cmds) {
-        
+
     }
-};
+}
 
 module.exports = Rover;
