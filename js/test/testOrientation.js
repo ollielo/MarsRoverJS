@@ -60,6 +60,20 @@ describe('Orientation', function () {
             var advance = Orientation.East.advance('b');
             advance.x.should.be.exactly(-1);
             advance.y.should.be.exactly(0);
-        })
+        });
     });
+    
+    describe("West", function () {
+        it("should advance in -x direction when moving forward", function () {
+            var advance = Orientation.West.advance('f');
+            advance.x.should.be.exactly(-1);
+            advance.y.should.be.exactly(0);
+        });
+        it("should advance in x direction when moving forward", function () {
+            var advance = Orientation.West.advance('b');
+            advance.x.should.be.exactly(1);
+            advance.y.should.be.exactly(0);
+        })
+        
+    })
 });

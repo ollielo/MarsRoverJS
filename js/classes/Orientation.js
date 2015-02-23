@@ -33,7 +33,13 @@ var East = {
 };
 
 var West = {
-    name: "West"
+    name: "West",
+    advance: function(dir) {
+        return {
+            'f': {x: -1, y: 0},
+            'b': {x: 1, y: 0}
+        }[dir];
+    }
 };
 
 function Orientation(orient) {
