@@ -2,10 +2,12 @@
  * Created by ollie on 2/22/15.
  */
 
+var Orientation = require('./Orientation');
+
 function Rover(x, y, orientation) {
     this.x = x;
     this.y = y;
-    this.orientation = orientation;
+    this.orientation = new Orientation(orientation);
     
     this.receiveCommands = function (cmds) {
         if (orientation == 'N') {
