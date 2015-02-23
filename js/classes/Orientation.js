@@ -10,12 +10,18 @@ North.advance = function(dir) {
     }[dir];
 };
 
+var South = {
+    name: "South"
+};
+
 function Orientation(orient) {
     return {
-        "N": Orientation.North
+        "N": Orientation.North,
+        "S": Orientation.South
     }[orient];
 }
 
 Orientation.North = North;
+Orientation.South = South;
 
 module.exports = Orientation;

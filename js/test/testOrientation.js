@@ -10,6 +10,10 @@ describe('Orientation', function () {
             var orientation = new Orientation('N');
             orientation.should.be.exactly(Orientation.North);
         });
+        it('should accept character "S" and return South', function () {
+            var orientation = new Orientation('S');
+            orientation.should.be.exactly(Orientation.South);
+        })
     });
     
     describe("North", function () {
