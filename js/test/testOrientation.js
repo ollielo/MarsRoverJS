@@ -28,4 +28,12 @@ describe('Orientation', function () {
             advance.y.should.be.exactly(-1);
         });
     });
+    
+    describe("South", function () {
+        it('should advance in -y direction when moving forward', function () {
+            var advance = Orientation.South.advance('f');
+            advance.x.should.be.exactly(0);
+            advance.y.should.be.exactly(-1);
+        })
+    })
 });
