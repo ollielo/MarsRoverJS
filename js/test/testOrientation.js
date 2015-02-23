@@ -18,5 +18,10 @@ describe('Orientation', function () {
             advance.x.should.be.exactly(0);
             advance.y.should.be.exactly(1);
         });
-    })
+        it("should advance in -y direction when moveing backward", function () {
+            var advance = Orientation.North.advance('b');
+            advance.x.should.be.exactly(0);
+            advance.y.should.be.exactly(-1);
+        });
+    });
 });
