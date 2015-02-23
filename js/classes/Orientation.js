@@ -11,7 +11,13 @@ North.advance = function(dir) {
 };
 
 var South = {
-    name: "South"
+    name: "South",
+    advance: function(dir) {
+        return {
+            'f': {x: 0, y: -1},
+            'b': {x: 0, y: -1}
+        }[dir];
+    }
 };
 
 function Orientation(orient) {
