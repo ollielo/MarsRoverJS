@@ -10,18 +10,10 @@ function Rover(x, y, orientation) {
     this.orientation = new Orientation(orientation);
     
     this.receiveCommands = function (cmds) {
-        if (orientation == 'N') {
-            if (cmds == 'f') {
-                this.y += 1;
-            } else {
-                this.y -= 1;
-            }
-        } else if (orientation == 'S') {
-            if (cmds == 'f') {
-                this.y -= 1;
-            } else {
-                this.y += 1;
-            }
+        if (cmds == 'f' || cmds == 'b') {
+            var advance = this.orientation.advance(cmds);
+            this.x += advance.x;
+            this.y += advance.y;
         }
     }
 }
