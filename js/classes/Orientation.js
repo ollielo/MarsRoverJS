@@ -26,16 +26,22 @@ var East = {
     name: "East"
 };
 
+var West = {
+    name: "West"
+};
+
 function Orientation(orient) {
     return {
         "N": Orientation.North,
         "S": Orientation.South,
-        "E": Orientation.East
+        "E": Orientation.East,
+        "W": Orientation.West
     }[orient];
 }
 
 Orientation.North = North;
 Orientation.South = South;
 Orientation.East = East;
+Orientation.West = West;
 
 module.exports = Orientation;
