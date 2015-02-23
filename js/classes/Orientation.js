@@ -3,6 +3,11 @@
  */
 
 var North = {name: "North"};
+North.advance = function(dir) {
+    return {
+        'f': {x: 0, y: 1}
+    }[dir];
+};
 
 function Orientation(orient) {
     return {

@@ -17,6 +17,6 @@ describe('Orientation', function () {
             var advance = Orientation.North.advance('f');
             advance.x.should.be.exactly(0);
             advance.y.should.be.exactly(1);
-        })
+        });
     })
 });
