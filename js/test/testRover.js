@@ -61,5 +61,12 @@ describe('A Mars Rover', function () {
                 });
             });
         });
+
+        it("should react to multiple commands", function () {
+            var rover = new Rover(0, 0, 'N');
+            rover.receiveCommands('fff');
+            rover.x.should.be.exactly(0);
+            rover.y.should.be.exactly(3);
+        })
     });
 });
