@@ -11,4 +11,12 @@ describe('Orientation', function () {
             orientation.should.be.exactly(Orientation.North);
         });
     });
+    
+    describe("North", function () {
+        it("should advance in y direction when moving forward", function () {
+            var advance = Orientation.North.advance('f');
+            advance.x.should.be.exactly(0);
+            advance.y.should.be.exactly(1);
+        })
+    })
 });
