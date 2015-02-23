@@ -23,7 +23,13 @@ var South = {
 };
 
 var East = {
-    name: "East"
+    name: "East",
+    advance: function(dir) {
+        return {
+            'f': {x: 1, y: 0},
+            'b': {x: -1, y: 0}
+        }[dir];
+    }
 };
 
 var West = {
