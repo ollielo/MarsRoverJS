@@ -10,11 +10,18 @@ function Rover(x, y, orientation) {
     this.orientation = new Orientation(orientation);
     
     this.receiveCommands = function (cmds) {
-        if (cmds == 'f' || cmds == 'b') {
-            var advance = this.orientation.advance(cmds);
-            this.x += advance.x;
-            this.y += advance.y;
-        }
+        // 'this' in the callback function in .forEach does not refer to the
+        // Rover object, it refers to the ??? We have to save the reference
+        // tp the Rover as _this.
+        var _this = this;
+        cmds.split('').forEach(function (cmd) {
+            console.log(this);
+            if (cmd == 'f' || cmd == 'b') {
+                var advance = _this.orientation.advance(cmd);
+                _this.x += advance.x;
+                _this.y += advance.y;
+            }
+        });
     }
 }
 
