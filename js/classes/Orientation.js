@@ -5,7 +5,8 @@
 var North = {name: "North"};
 North.advance = function(dir) {
     return {
-        'f': {x: 0, y: 1}
+        'f': {x: 0, y: 1},
+        'b': {x: 0, y: -1}
     }[dir];
 };
 
