@@ -20,6 +20,10 @@ function Rover(x, y, orientation) {
                 _this.x += advance.x;
                 _this.y += advance.y;
             }
+            if (cmd == 'l') {
+                _this.orientation = _this.orientation.turn(cmd);
+                
+            }
         });
     }
 }

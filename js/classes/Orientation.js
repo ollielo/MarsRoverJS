@@ -9,6 +9,11 @@ var North = {
             'f': {x: 0, y: 1},
             'b': {x: 0, y: -1}
         }[dir];
+    },
+    turn: function(dir) {
+        return {
+            'l': West
+        }[dir];
     }
 };
 
