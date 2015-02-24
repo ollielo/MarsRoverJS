@@ -15,7 +15,6 @@ function Rover(x, y, orientation) {
         // tp the Rover as _this.
         var _this = this;
         cmds.split('').forEach(function (cmd) {
-            console.log(this);
             if (cmd == 'f' || cmd == 'b') {
                 var advance = _this.orientation.advance(cmd);
                 _this.x += advance.x;
