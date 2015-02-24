@@ -12,7 +12,8 @@ var North = {
     },
     turn: function(dir) {
         return {
-            'l': West
+            'l': West,
+            'r': East
         }[dir];
     }
 };
