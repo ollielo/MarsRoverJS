@@ -25,6 +25,12 @@ var South = {
             'f': {x: 0, y: -1},
             'b': {x: 0, y: 1}
         }[dir];
+    },
+    turn: function(dir) {
+        return {
+            'l': East,
+            'r': West
+        }[dir];
     }
 };
 
@@ -35,6 +41,12 @@ var East = {
             'f': {x: 1, y: 0},
             'b': {x: -1, y: 0}
         }[dir];
+    },
+    turn: function(dir) {
+        return {
+            'l': North,
+            'r': South
+        }[dir];
     }
 };
 
@@ -44,6 +56,12 @@ var West = {
         return {
             'f': {x: -1, y: 0},
             'b': {x: 1, y: 0}
+        }[dir];
+    },
+    turn: function(dir) {
+        return {
+            'l': South,
+            'r': North
         }[dir];
     }
 };

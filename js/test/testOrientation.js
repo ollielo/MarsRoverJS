@@ -56,6 +56,14 @@ describe('Orientation', function () {
             advance.x.should.be.exactly(0);
             advance.y.should.be.exactly(1);
         });
+        it("should turn into East after turning left", function () {
+            var orientation = Orientation.South;
+            orientation.turn('l').should.be.exactly(Orientation.East);
+        });
+        it("should turn into West after turning right", function () {
+            var orientation = Orientation.South;
+            orientation.turn('r').should.be.exactly(Orientation.West);
+        });
     });
     
     describe("East", function () {
@@ -69,6 +77,14 @@ describe('Orientation', function () {
             advance.x.should.be.exactly(-1);
             advance.y.should.be.exactly(0);
         });
+        it("should turn into North after turning left", function () {
+            var orientation = Orientation.East;
+            orientation.turn('l').should.be.exactly(Orientation.North);
+        });
+        it("should turn into South after turning right", function () {
+            var orientation = Orientation.East;
+            orientation.turn('r').should.be.exactly(Orientation.South);
+        });
     });
     
     describe("West", function () {
@@ -81,7 +97,14 @@ describe('Orientation', function () {
             var advance = Orientation.West.advance('b');
             advance.x.should.be.exactly(1);
             advance.y.should.be.exactly(0);
-        })
-        
-    })
+        });
+        it("should turn into South after turning left", function () {
+            var orientation = Orientation.West;
+            orientation.turn('l').should.be.exactly(Orientation.South);
+        });
+        it("should turn into North after turning right", function () {
+            var orientation = Orientation.West;
+            orientation.turn('r').should.be.exactly(Orientation.North);
+        });
+    });
 });
