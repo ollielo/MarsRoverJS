@@ -35,6 +35,10 @@ describe('Orientation', function () {
             advance.x.should.be.exactly(0);
             advance.y.should.be.exactly(-1);
         });
+        it("should turn to West after turning left", function () {
+            var orientation = Orientation.North;
+            orientation.turn('l').should.be.exactly(Orientation.West);
+        });
     });
     
     describe("South", function () {

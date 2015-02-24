@@ -39,15 +39,6 @@ describe('A Mars Rover', function () {
                     rover.orientation.should.be.exactly(Orientation.North);
                 });
             });
-            describe("A Left command", function () {
-                it("should turn the Rover facing West", function () {
-                    var rover = new Rover(0, 0, 'N');
-                    rover.receiveCommands('l');
-                    rover.x.should.be.exactly(0);
-                    rover.y.should.be.exactly(0);
-                    rover.orientation.should.be.exactly(Orientation.West);
-                })
-            })
         });
 
         describe('When the Rover is facing South', function () {
