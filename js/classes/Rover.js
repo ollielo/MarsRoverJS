@@ -12,18 +12,20 @@ function Rover(x, y, orientation) {
     this.receiveCommands = function (cmds) {
         // 'this' in the callback function in .forEach does not refer to the
         // Rover object, it refers to the global object We have to save the
-        // reference to the Rover as _this.
-        var _this = this;
+        // reference to the Rover as that.
+        // var that = this;
+        
+        // An alternative solution is to use the thisArg of forEach()
         cmds.split('').forEach(function (cmd) {
             if (cmd == 'f' || cmd == 'b') {
-                var advance = _this.orientation.advance(cmd);
-                _this.x += advance.x;
-                _this.y += advance.y;
+                var advance = this.orientation.advance(cmd);
+                this.x += advance.x;
+                this.y += advance.y;
             }
             if (cmd == 'l' || cmd == 'r') {
-                _this.orientation = _this.orientation.turn(cmd);
+                this.orientation = this.orientation.turn(cmd);
             }
-        });
+        }, this);
     }
 }
 
