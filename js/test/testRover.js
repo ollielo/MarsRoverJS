@@ -13,13 +13,24 @@ describe('A Mars Rover', function () {
             rover.orientation.should.be.exactly(Orientation.North);
         });
     });
-    
+
     describe('Receives Commands', function () {
         it('should receive a character string of commands', function () {
             var rover = new Rover(0, 0, 'N');
             rover.receiveCommands('frbl');
         });
-        
+    });
+
+    describe('Executes Commands', function () {
+        it("should react to multiple commands in the string", function () {
+            var rover = new Rover(0, 0, 'N');
+            rover.receiveCommands('fff');
+            rover.x.should.be.exactly(0);
+            rover.y.should.be.exactly(3);
+        });
+    });
+
+    describe("Moves", function () {
         describe('When the Rover is facing North', function () {
             describe('A Forward command', function () {
                 it("should increase Rover's y position by 1 unit", function () {
@@ -61,19 +72,15 @@ describe('A Mars Rover', function () {
                 });
             });
         });
-
-        it("should react to multiple commands", function () {
-            var rover = new Rover(0, 0, 'N');
-            rover.receiveCommands('fff');
-            rover.x.should.be.exactly(0);
-            rover.y.should.be.exactly(3);
-        });
-
+    });
+    
+    describe("Turns", function () {
         it("should make a right by turning left 3 times", function () {
             var rover = new Rover(0, 0, 'N');
             rover.receiveCommands('flflfl');
             rover.orientation.should.be.exactly(Orientation.North.turn('r'));
         });
+
         it("should make a left by turning right 3 times", function () {
             var rover = new Rover(0, 0, 'N');
             rover.receiveCommands('frfrfr');
