@@ -4,7 +4,7 @@
 
 var Orientation = require('./Orientation');
 
-function Rover(x, y, orientation) {
+function Rover(x, y, orientation, world) {
     this.x = x;
     this.y = y;
     this.orientation = new Orientation(orientation);
@@ -12,15 +12,21 @@ function Rover(x, y, orientation) {
     this.receiveCommands = function (cmds) {
         // 'this' in the callback function in .forEach does not refer to the
         // Rover object, it refers to the global object We have to save the
-        // reference to the Rover as that.
+        // reference to the Rover as some local variable.
         // var that = this;
         
         // An alternative solution is to use the thisArg of forEach()
         cmds.split('').forEach(function (cmd) {
             if (cmd == 'f' || cmd == 'b') {
                 var advance = this.orientation.advance(cmd);
-                this.x += advance.x;
-                this.y += advance.y;
+                if (world == undefined) {
+                    this.x += advance.x;
+                    this.y += advance.y;
+                } else {
+                    var pos = world.proceed({x: this.x, y:this.y}, advance);
+                    this.x = pos.x;
+                    this.y = pos.y;
+                }
             }
             if (cmd == 'l' || cmd == 'r') {
                 this.orientation = this.orientation.turn(cmd);

@@ -2,6 +2,7 @@
  * Created by ollie on 2/22/15.
  */
 var Orientation = require('../classes/Orientation');    
+var World = require('../classes/World');
 var Rover = require('../classes/Rover');
 
 describe('A Mars Rover', function () {
@@ -87,4 +88,25 @@ describe('A Mars Rover', function () {
             rover.orientation.should.be.exactly(Orientation.North.turn('l'));
         })
     });
+
+    describe("In a finite Mars world", function () {
+        var world;
+        
+        beforeEach(function () {
+           world =  new World(-2, -2, 2, 2);
+        });
+        
+        it("should wrap around when moving beyond North edge", function () {
+            var rover = new Rover(0, 0, 'N', world);
+            rover.receiveCommands('fff');
+            rover.x.should.be.exactly(0);
+            rover.y.should.be.exactly(-2);
+        });
+        it("should wrap around when moving beyond South edge", function () {
+            var rover = new Rover(0, 0, 'N', world);
+            rover.receiveCommands('bbb');
+            rover.x.should.be.exactly(0);
+            rover.y.should.be.exactly(2);
+        })
+    })
 });
