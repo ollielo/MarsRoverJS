@@ -9,6 +9,12 @@ function Rover(x, y, orientation, world) {
     this.y = y;
     this.orientation = new Orientation(orientation);
     
+    // The parameter 'world' is actually a copy of the reference to the object
+    // in the caller. If we assign world to an instance variable like:
+    // this.world = world;
+    // We are actually saving another copy of the reference, not the object.
+    // This means that our 'world' may change without our knowledge.
+    
     this.receiveCommands = function (cmds) {
         // 'this' in the callback function in .forEach does not refer to the
         // Rover object, it refers to the global object We have to save the
