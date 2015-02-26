@@ -16,6 +16,12 @@ function World(xmin, ymin, xmax, ymax) {
     this.proceed = function(position, advance) {
         position.x += advance.x;
         position.y += advance.y;
+
+        if (position.x > xmax) {
+            position.x = xmin + (position.x - xmax - 1);
+        } else if (position.x < xmin) {
+            position.x = xmax + (position.x - xmin + 1);
+        }
         
         if (position.y > ymax) {
             position.y = ymin + (position.y - ymax - 1);

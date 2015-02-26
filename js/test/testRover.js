@@ -107,6 +107,18 @@ describe('A Mars Rover', function () {
             rover.receiveCommands('bbb');
             rover.x.should.be.exactly(0);
             rover.y.should.be.exactly(2);
+        });
+        it("should wrap around when moving beyond East edge", function () {
+            var rover = new Rover(0, 0, 'E', world);
+            rover.receiveCommands('fff');
+            rover.x.should.be.exactly(-2);
+            rover.y.should.be.exactly(0);
+        });
+        it("should wrap around when moving beyond West edge", function () {
+            var rover = new Rover(0, 0, 'E', world);
+            rover.receiveCommands('bbb');
+            rover.x.should.be.exactly(2);
+            rover.y.should.be.exactly(0);
         })
     })
 });
