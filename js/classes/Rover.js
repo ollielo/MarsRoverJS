@@ -3,12 +3,17 @@
  */
 
 var Orientation = require('./Orientation');
+var World = require('./World');
 
 function Rover(x, y, orientation, world) {
     this.x = x;
     this.y = y;
     this.orientation = new Orientation(orientation);
     
+    if (world == undefined) {
+        world = new World();
+    }
+
     // The parameter 'world' is actually a copy of the reference to the object
     // in the caller. If we assign world to an instance variable like:
     // this.world = world;
@@ -25,14 +30,9 @@ function Rover(x, y, orientation, world) {
         cmds.split('').forEach(function (cmd) {
             if (cmd == 'f' || cmd == 'b') {
                 var advance = this.orientation.advance(cmd);
-                if (world == undefined) {
-                    this.x += advance.x;
-                    this.y += advance.y;
-                } else {
-                    var pos = world.proceed({x: this.x, y:this.y}, advance);
-                    this.x = pos.x;
-                    this.y = pos.y;
-                }
+                var pos = world.proceed({x: this.x, y:this.y}, advance);
+                this.x = pos.x;
+                this.y = pos.y;
             }
             if (cmd == 'l' || cmd == 'r') {
                 this.orientation = this.orientation.turn(cmd);
