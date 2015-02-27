@@ -4,9 +4,21 @@
 
 var InfiniteWorld = {
     proceed: function(position, advance) {
-        position.x += advance.x;
-        position.y += advance.y;
-        return position;
+        var x = position.x + advance.x;
+        var y = position.y + advance.y;
+
+        for (var i = 0; i < this.obstacle.length; i++) {
+            if (this.obstacle[i].x == x && this.obstacle[i].y == y) {
+                return position;
+            }
+        }
+        return {x: x, y: y};
+    },
+
+    obstacle: [],
+
+    addObstacle: function(x, y) {
+        this.obstacle.push({x: x, y: y})
     }
 };
 
@@ -37,6 +49,12 @@ function LimitedWorld(xmin, ymin, xmax, ymax) {
             position.y = ymax + (position.y - ymin + 1);
         }
         return position;
+    };
+
+    this.obstacle = [];
+
+    this.addObstacle = function (x, y) {
+        this.obstacle.push({x: x, y: y});
     }
 }
 
