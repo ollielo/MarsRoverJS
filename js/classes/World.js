@@ -34,21 +34,28 @@ function LimitedWorld(xmin, ymin, xmax, ymax) {
     // types, they are passed by value. Thus xmax is a local copy that's only
     // available to the constructor.
     this.proceed = function(position, advance) {
-        position.x += advance.x;
-        position.y += advance.y;
+        var x = position.x + advance.x;
+        var y = position.y + advance.y;
 
-        if (position.x > xmax) {
-            position.x = xmin + (position.x - xmax - 1);
-        } else if (position.x < xmin) {
-            position.x = xmax + (position.x - xmin + 1);
+        if (x > xmax) {
+            x = xmin + (x - xmax - 1);
+        } else if (x < xmin) {
+            x = xmax + (x - xmin + 1);
         }
         
-        if (position.y > ymax) {
-            position.y = ymin + (position.y - ymax - 1);
-        } else if (position.y < ymin) {
-            position.y = ymax + (position.y - ymin + 1);
+        if (y > ymax) {
+            y = ymin + (y - ymax - 1);
+        } else if (y < ymin) {
+            y = ymax + (y - ymin + 1);
         }
-        return position;
+        
+        for (var i = 0; i < this.obstacle.length; i++) {
+            if (this.obstacle[i].x == x && this.obstacle[i].y == y) {
+                return position;
+            }
+        }
+        
+        return {x: x, y: y};
     };
 
     this.obstacle = [];

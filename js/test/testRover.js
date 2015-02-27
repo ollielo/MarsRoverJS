@@ -122,14 +122,10 @@ describe('A Mars Rover', function () {
         });
     });
     
-    describe("In a dangerous world with obstacles", function () {
+    describe("In a dangerous Infinite world with obstacles", function () {
         it("should be able to add an obstacle anywhere in the Infinite world", function () {
             var world = new World();
             world.addObstacle(123, 456);
-        });
-        it("should be able to add an obstacle anywhere inside a finite world", function () {
-            var world = new World(-2, -2, 3, 3);
-            world.addObstacle(1, 1);
         });
         it("should block the rover when it faces the obstacle", function () {
             var world = new World();
@@ -138,6 +134,21 @@ describe('A Mars Rover', function () {
             rover.receiveCommands('ffffff');
             rover.x.should.be.exactly(0);
             rover.y.should.be.exactly(1);
+        });
+    });
+    
+    describe("In a dangerous Limited World with obstacles", function () {
+        it("should be able to add an obstacle anywhere inside a finite world", function () {
+            var world = new World(-2, -2, 3, 3);
+            world.addObstacle(1, 1);
+        });
+        it("should block the rover when it faces the obstacle", function () {
+            var world = new World(-2, -2, 3, 3);
+            world.addObstacle(2, 0);
+            var rover = new Rover(0, 0, 'E', world);
+            rover.receiveCommands('fffff');
+            rover.x.should.be.exactly(1);
+            rover.y.should.be.exactly(0);
         })
-    })
+    });
 });
