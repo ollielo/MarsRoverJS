@@ -1,7 +1,8 @@
 /**
  * Created by ollie on 2/22/15.
  */
-
+var Orientation = require('../classes/Orientation');    
+var World = require('../classes/World');
 var Rover = require('../classes/Rover');
 
 describe('A Mars Rover', function () {
@@ -10,16 +11,27 @@ describe('A Mars Rover', function () {
             var rover = new Rover(0, 0, 'N');
             rover.x.should.be.exactly(0);
             rover.y.should.be.exactly(0);
-            rover.orientation.should.be.exactly('N');
+            rover.orientation.should.be.exactly(Orientation.North);
         });
     });
-    
+
     describe('Receives Commands', function () {
         it('should receive a character string of commands', function () {
             var rover = new Rover(0, 0, 'N');
             rover.receiveCommands('frbl');
         });
-        
+    });
+
+    describe('Executes Commands', function () {
+        it("should react to multiple commands in the string", function () {
+            var rover = new Rover(0, 0, 'N');
+            rover.receiveCommands('fff');
+            rover.x.should.be.exactly(0);
+            rover.y.should.be.exactly(3);
+        });
+    });
+
+    describe("Moves", function () {
         describe('When the Rover is facing North', function () {
             describe('A Forward command', function () {
                 it("should increase Rover's y position by 1 unit", function () {
@@ -27,7 +39,7 @@ describe('A Mars Rover', function () {
                     rover.receiveCommands('f');
                     rover.x.should.be.exactly(0);
                     rover.y.should.be.exactly(1);
-                    rover.orientation.should.be.exactly('N');
+                    rover.orientation.should.be.exactly(Orientation.North);
                 });
             });
             describe('A Backward command', function () {
@@ -36,7 +48,7 @@ describe('A Mars Rover', function () {
                     rover.receiveCommands('b');
                     rover.x.should.be.exactly(0);
                     rover.y.should.be.exactly(-1);
-                    rover.orientation.should.be.exactly('N');
+                    rover.orientation.should.be.exactly(Orientation.North);
                 });
             });
         });
@@ -48,7 +60,7 @@ describe('A Mars Rover', function () {
                     rover.receiveCommands('f');
                     rover.x.should.be.exactly(0);
                     rover.y.should.be.exactly(-1);
-                    rover.orientation.should.be.exactly('S');
+                    rover.orientation.should.be.exactly(Orientation.South);
                 });
             });
             describe('A Backward command', function () {
@@ -57,9 +69,86 @@ describe('A Mars Rover', function () {
                     rover.receiveCommands('b');
                     rover.x.should.be.exactly(0);
                     rover.y.should.be.exactly(1);
-                    rover.orientation.should.be.exactly('S');
+                    rover.orientation.should.be.exactly(Orientation.South);
                 });
             });
         });
+    });
+    
+    describe("Turns", function () {
+        it("should make a right by turning left 3 times", function () {
+            var rover = new Rover(0, 0, 'N');
+            rover.receiveCommands('flflfl');
+            rover.orientation.should.be.exactly(Orientation.North.turn('r'));
+        });
+
+        it("should make a left by turning right 3 times", function () {
+            var rover = new Rover(0, 0, 'N');
+            rover.receiveCommands('frfrfr');
+            rover.orientation.should.be.exactly(Orientation.North.turn('l'));
+        })
+    });
+
+    describe("In a finite Mars world", function () {
+        var world;
+        
+        beforeEach(function () {
+           world =  new World(-2, -2, 2, 2);
+        });
+        
+        it("should wrap around when moving beyond North edge", function () {
+            var rover = new Rover(0, 0, 'N', world);
+            rover.receiveCommands('fff');
+            rover.x.should.be.exactly(0);
+            rover.y.should.be.exactly(-2);
+        });
+        it("should wrap around when moving beyond South edge", function () {
+            var rover = new Rover(0, 0, 'N', world);
+            rover.receiveCommands('bbb');
+            rover.x.should.be.exactly(0);
+            rover.y.should.be.exactly(2);
+        });
+        it("should wrap around when moving beyond East edge", function () {
+            var rover = new Rover(0, 0, 'E', world);
+            rover.receiveCommands('fff');
+            rover.x.should.be.exactly(-2);
+            rover.y.should.be.exactly(0);
+        });
+        it("should wrap around when moving beyond West edge", function () {
+            var rover = new Rover(0, 0, 'E', world);
+            rover.receiveCommands('bbb');
+            rover.x.should.be.exactly(2);
+            rover.y.should.be.exactly(0);
+        });
+    });
+    
+    describe("In a dangerous Infinite world with obstacles", function () {
+        it("should be able to add an obstacle anywhere in the Infinite world", function () {
+            var world = new World();
+            world.addObstacle(123, 456);
+        });
+        it("should block the rover when it faces the obstacle", function () {
+            var world = new World();
+            world.addObstacle(0, 2);
+            var rover = new Rover(0, 0, 'N', world);
+            rover.receiveCommands('ffffff');
+            rover.x.should.be.exactly(0);
+            rover.y.should.be.exactly(1);
+        });
+    });
+    
+    describe("In a dangerous Limited World with obstacles", function () {
+        it("should be able to add an obstacle anywhere inside a finite world", function () {
+            var world = new World(-2, -2, 3, 3);
+            world.addObstacle(1, 1);
+        });
+        it("should block the rover when it faces the obstacle", function () {
+            var world = new World(-2, -2, 3, 3);
+            world.addObstacle(2, 0);
+            var rover = new Rover(0, 0, 'E', world);
+            rover.receiveCommands('fffff');
+            rover.x.should.be.exactly(1);
+            rover.y.should.be.exactly(0);
+        })
     });
 });
