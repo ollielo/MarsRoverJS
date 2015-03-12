@@ -27,7 +27,7 @@ function LimitedWorld(xmin, ymin, xmax, ymax) {
     // really need to have the parameters as instance variables. proceed() will
     // automatically capture those "free variables". Thus, xmin etc. are
     // essentially "private variables" of the object. They can not be accessed
-    // by other objects since they are the public "properties" of the object.
+    // by other objects since they are not the public "properties" of the object.
     
     // The question is, are variables passed by value or reference? Will, say,
     // xmax be changed under us? The answer is NO. For parameters of primitive
