@@ -3,6 +3,7 @@
  */
 
 var Orientation = require('./Orientation');
+var Position = require('./Position');
 var World = require('./World');
 
 function Rover(x, y, orientation, world) {
