@@ -6,8 +6,7 @@ var Orientation = require('./Orientation');
 var World = require('./World');
 
 function Rover(x, y, orientation, world) {
-    this.x = x;
-    this.y = y;
+    this.position = new Position(x, y);
     this.orientation = new Orientation(orientation);
     
     if (world == undefined) {
@@ -30,9 +29,7 @@ function Rover(x, y, orientation, world) {
         cmds.split('').forEach(function (cmd) {
             if (cmd == 'f' || cmd == 'b') {
                 var advance = this.orientation.advance(cmd);
-                var pos = world.proceed({x: this.x, y:this.y}, advance);
-                this.x = pos.x;
-                this.y = pos.y;
+                this.position =  world.proceed(this.position, advance);
             }
             if (cmd == 'l' || cmd == 'r') {
                 this.orientation = this.orientation.turn(cmd);
